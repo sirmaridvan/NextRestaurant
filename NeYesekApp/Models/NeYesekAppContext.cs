@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NeYesekApp.Migrations;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace NeYesekApp.Models
 
         public NeYesekAppContext() : base("name=NeYesekAppContext")
         {
-            Database.SetInitializer<NeYesekAppContext>(null);
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<NeYesekAppContext, Configuration>());
         }
 
         public System.Data.Entity.DbSet<NeYesekApp.Models.GroupMember> GroupMembers { get; set; }

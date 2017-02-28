@@ -13,7 +13,6 @@ namespace NeYesekApp
         private NeYesekAppContext db = new NeYesekAppContext();
         protected void Page_Load(object sender, EventArgs e)
         {
-            db.Database.CreateIfNotExists();
             GroupMember member = db.GroupMembers.Add(new GroupMember()
             {
                 Id = 6,

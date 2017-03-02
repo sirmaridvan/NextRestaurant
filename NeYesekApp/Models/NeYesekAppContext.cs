@@ -21,6 +21,19 @@ namespace NeYesekApp.Models
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<NeYesekAppContext, Configuration>());
         }
 
-        public System.Data.Entity.DbSet<NeYesekApp.Models.GroupMember> GroupMembers { get; set; }
+        public System.Data.Entity.DbSet<NeYesekApp.Models.Restaurant> Restaurants { get; set; }
+        public System.Data.Entity.DbSet<NeYesekApp.Models.User> Users { get; set; }
+        public System.Data.Entity.DbSet<NeYesekApp.Models.UserVote> UserVotes { get; set; }
+
+        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        //{
+        //    modelBuilder.Entity<User>()
+        //        .HasMany<UserVote>(u => u.Votes)
+        //        .WithRequired(v => v.User);
+
+        //    modelBuilder.Entity<Restaurant>()
+        //        .HasMany<UserVote>(u => u.Votes)
+        //        .WithRequired(v => v.Restaurant);
+        //}
     }
 }

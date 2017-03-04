@@ -55,8 +55,9 @@
                 <div class="collapse navbar-collapse" id="navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="#">Home</a></li>
-                        <li><a href="#">Restaurants</a></li>
+                        <li><a href="">Restaurants</a></li>
                         <li><a href="#">Vote</a></li>
+                        <li><a href="Members.aspx">Members</a></li>
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->

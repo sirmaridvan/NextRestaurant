@@ -123,6 +123,7 @@
     <Content Include="Content\Register.css" />
     <Content Include="Content\Login.css" />
     <Content Include="Content\NeYesekMaster.css" />
+    <Content Include="Content\Restaurants.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -132,6 +133,8 @@
     <None Include="Properties\PublishProfiles\neyesek - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Register.aspx" />
+    <Content Include="RestaurantAdd.aspx" />
+    <Content Include="Restaurants.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -238,6 +241,20 @@
     </Compile>
     <Compile Include="Register.aspx.designer.cs">
       <DependentUpon>Register.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RestaurantAdd.aspx.cs">
+      <DependentUpon>RestaurantAdd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RestaurantAdd.aspx.designer.cs">
+      <DependentUpon>RestaurantAdd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Restaurants.aspx.cs">
+      <DependentUpon>Restaurants.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Restaurants.aspx.designer.cs">
+      <DependentUpon>Restaurants.aspx</DependentUpon>
     </Compile>
     <Compile Include="Site.Mobile.Master.cs">
       <DependentUpon>Site.Mobile.Master</DependentUpon>

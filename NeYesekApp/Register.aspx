@@ -48,13 +48,6 @@
                                 <div class="form-group">
                                     <asp:TextBox class="form-control" TextMode="Password" placeholder="Password" name="password" value="" runat="server" ID="register_password_again" />
                                 </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <asp:CheckBox name="remember" runat="server" type="checkbox" value="Remember Me" />
-                                        Remember Me
-			    	    
-                                    </label>
-                                </div>
                                 <asp:Button class="btn btn-lg btn-success btn-block" type="submit" Text="Register" runat="server" ID="register_button" OnClick="register_button_Click" />
                             </fieldset>
                         </div>

@@ -10,33 +10,33 @@
 namespace NeYesekApp {
     
     
-    public partial class NeYesekBootstrap {
+    public partial class RestaurantAdd {
         
         /// <summary>
-        /// title control.
+        /// restaurant_name control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder title;
+        protected global::System.Web.UI.WebControls.TextBox restaurant_name;
         
         /// <summary>
-        /// head control.
+        /// restaurant_picture control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder head;
+        protected global::System.Web.UI.WebControls.FileUpload restaurant_picture;
         
         /// <summary>
-        /// main control.
+        /// add_button control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder main;
+        protected global::System.Web.UI.WebControls.Button add_button;
     }
 }

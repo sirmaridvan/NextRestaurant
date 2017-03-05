@@ -10,7 +10,7 @@
 namespace NeYesekApp {
     
     
-    public partial class Login {
+    public partial class Register {
         
         /// <summary>
         /// form1 control.
@@ -22,30 +22,48 @@ namespace NeYesekApp {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// login_email control.
+        /// register_email control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox login_email;
+        protected global::System.Web.UI.WebControls.TextBox register_email;
         
         /// <summary>
-        /// login_password control.
+        /// register_name control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox login_password;
+        protected global::System.Web.UI.WebControls.TextBox register_name;
         
         /// <summary>
-        /// login_button control.
+        /// register_password control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button login_button;
+        protected global::System.Web.UI.WebControls.TextBox register_password;
+        
+        /// <summary>
+        /// register_password_again control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox register_password_again;
+        
+        /// <summary>
+        /// register_button control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button register_button;
     }
 }

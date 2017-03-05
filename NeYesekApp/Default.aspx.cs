@@ -13,7 +13,7 @@ namespace NeYesekApp
         
         protected void Page_Load(object sender, EventArgs e)
         {
-            using (var db = new NeYesekAppContext()) {
+            /*using (var db = new NeYesekAppContext()) {
 
                 var user = (from d in db.Users where d.Name == "Elif Benli" select d).Single();
 
@@ -33,7 +33,7 @@ namespace NeYesekApp
                     
                 }
 
-            }
+            }*/
         }
     }
 }

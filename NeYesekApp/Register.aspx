@@ -1,14 +1,14 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="NeYesekApp.Login" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Register.aspx.cs" Inherits="NeYesekApp.Register" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>NeYesek - Login</title>
+    <title>NeYesek - Register</title>
     <script src="Scripts/jquery-1.10.2.min.js"></script>
     <script src="Scripts/bootstrap.js"></script>
     <link href="Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="Content/Login.css" rel="stylesheet" type="text/css" />
+    <link href="Content/Register.css" rel="stylesheet" type="text/css" />
 
     <script>
         $(document).ready(function () {
@@ -32,24 +32,23 @@
                 <div class="col-md-4 col-md-offset-4">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h3 class="panel-title">Sign In</h3>
+                            <h3 class="panel-title">Sign Up</h3>
                         </div>
                         <div class="panel-body">
                             <fieldset>
                                 <div class="form-group">
-                                    <asp:TextBox class="form-control" placeholder="E-mail" name="email" TextMode="Email" runat="server" id="login_email" />
+                                    <asp:TextBox class="form-control" placeholder="E-mail" name="email" TextMode="Email" runat="server" ID="register_email" />
                                 </div>
                                 <div class="form-group">
-                                    <asp:TextBox class="form-control" TextMode="Password" placeholder="Password" name="password" value="" runat="server" id="login_password" />
+                                    <asp:TextBox class="form-control" placeholder="Name" name="name" TextMode="SingleLine" runat="server" ID="register_name" />
                                 </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <asp:CheckBox name="remember" runat="server" type="checkbox" value="Remember Me" />
-                                        Remember Me
-			    	    
-                                    </label>
+                                <div class="form-group">
+                                    <asp:TextBox class="form-control" TextMode="Password" placeholder="Password" name="password" value="" runat="server" ID="register_password" />
                                 </div>
-                                <asp:Button class="btn btn-lg btn-success btn-block" type="submit" Text="Login" runat="server" id="login_button" onclick="login_button_Click" />
+                                <div class="form-group">
+                                    <asp:TextBox class="form-control" TextMode="Password" placeholder="Password" name="password" value="" runat="server" ID="register_password_again" />
+                                </div>
+                                <asp:Button class="btn btn-lg btn-success btn-block" type="submit" Text="Register" runat="server" ID="register_button" OnClick="register_button_Click" />
                             </fieldset>
                         </div>
                     </div>

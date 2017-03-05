@@ -10,42 +10,33 @@
 namespace NeYesekApp {
     
     
-    public partial class Login {
+    public partial class RestaurantAdd {
         
         /// <summary>
-        /// form1 control.
+        /// restaurant_name control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        protected global::System.Web.UI.WebControls.TextBox restaurant_name;
         
         /// <summary>
-        /// login_email control.
+        /// restaurant_picture control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox login_email;
+        protected global::System.Web.UI.WebControls.FileUpload restaurant_picture;
         
         /// <summary>
-        /// login_password control.
+        /// add_button control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox login_password;
-        
-        /// <summary>
-        /// login_button control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button login_button;
+        protected global::System.Web.UI.WebControls.Button add_button;
     }
 }

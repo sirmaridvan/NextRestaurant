@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace NeYesekApp
 {
-    public partial class SiteMaster : MasterPage
+    public partial class Members : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

@@ -1,0 +1,20 @@
+﻿.elilrid {
+    background-color: #f8f8f8;
+}
+
+.navbar-default {
+    background-color: #2E2E2E;
+}
+
+.navbar {
+    border-radius: 0px; 
+    border: 0px solid transparent;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: #f8f8f8;
+}
+
+.navbar-default .navbar-brand {
+    color: #f8f8f8;
+}

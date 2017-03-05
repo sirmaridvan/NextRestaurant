@@ -5,5 +5,7 @@
     <br/>
     <br/>
     <br/>
-    <p class="lead">Merhaba canikom!</p>
+    <asp:TextBox runat="server" placeholder="Sender Email" ID="sender_address" TextMode="Email" />
+    <asp:TextBox runat="server" placeholder="Receiver Email" ID="receiver_address" TextMode="Email" />
+    <asp:Button CssClass="btn btn-default" runat="server" Text="Send Email" ID="email_send" OnClick="email_send_Click"/>
 </asp:Content>

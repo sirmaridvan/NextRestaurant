@@ -31,6 +31,24 @@ namespace NeYesekApp {
         protected global::System.Web.UI.WebControls.FileUpload restaurant_picture;
         
         /// <summary>
+        /// restaurant_isopen control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox restaurant_isopen;
+        
+        /// <summary>
+        /// restaurant_iswalking control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox restaurant_iswalking;
+        
+        /// <summary>
         /// add_button control.
         /// </summary>
         /// <remarks>

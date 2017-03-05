@@ -2,12 +2,27 @@
     background-color: #f8f8f8;
 }
 
-.navbar-default {
-    background-color: #2E2E2E;
+.navbar-brand-centered {
+    position: absolute;
+    left: 50%;
+    display: block;
+    width: 160px;
+    text-align: center;
+    background-color: transparent;
 }
 
+.navbar > .container .navbar-brand-centered,
+.navbar > .container-fluid .navbar-brand-centered {
+    margin-left: -80px;
+}
+
+.navbar-default {
+    background-color: #708090;
+    /* border-color: #708090; */
+}
+  
 .navbar {
-    border-radius: 0px; 
+    border-radius: 0px;
     border: 0px solid transparent;
 }
 

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/NeYesekBootstrap.Master" AutoEventWireup="true" CodeBehind="RestaurantAdd.aspx.cs" Inherits="NeYesekApp.RestaurantAdd" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/NeYesekBootstrap.Master" AutoEventWireup="true" CodeBehind="Add.aspx.cs" Inherits="NeYesekApp.RestaurantAdd" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="title" runat="server">
 </asp:Content>
@@ -35,14 +35,14 @@
                         </div>
                         <div class="checkbox">
                             <label>
-                                <asp:CheckBox name="isOpen" runat="server" type="checkbox" />
+                                <asp:CheckBox name="isOpen" runat="server" type="checkbox" ID="restaurant_isopen" />
                                 Is the restaurant active currently?
                             </label>
                         </div>
 
                         <div class="checkbox">
                             <label>
-                                <asp:CheckBox name="walking" runat="server" type="checkbox" />
+                                <asp:CheckBox name="walking" runat="server" type="checkbox" ID="restaurant_iswalking" />
                                 Is the restaurant available for walking?
                             </label>
                         </div>

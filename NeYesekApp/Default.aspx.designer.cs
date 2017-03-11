@@ -13,6 +13,15 @@ namespace NeYesekApp {
     public partial class Default {
         
         /// <summary>
+        /// IPAddress control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox IPAddress;
+        
+        /// <summary>
         /// sender_address control.
         /// </summary>
         /// <remarks>

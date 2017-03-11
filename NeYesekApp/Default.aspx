@@ -2,7 +2,9 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
+    
     <br/>
+    <asp:TextBox runat="server" placeholder="IP Address" ID="IPAddress" TextMode="SingleLine" />
     <br/>
     <br/>
     <asp:TextBox runat="server" placeholder="Sender Email" ID="sender_address" TextMode="Email" />

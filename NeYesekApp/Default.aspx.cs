@@ -14,27 +14,25 @@ namespace NeYesekApp
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            /*using (var db = new NeYesekAppContext()) {
+            var ip = GetUserIP();
+            IPAddress.Text = ip;
+        }
 
-                var user = (from d in db.Users where d.Name == "Elif Benli" select d).Single();
+        public string GetUserIP()
+        {
+            System.Web.HttpContext context = System.Web.HttpContext.Current;
+            string ipAddress = context.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
 
-                var restaurant = (from d in db.Restaurants where d.Name == "Sampi" select d).Single();
-
-                db.UserVotes.Add(new UserVote()
+            if (!string.IsNullOrEmpty(ipAddress))
+            {
+                string[] addresses = ipAddress.Split(',');
+                if (addresses.Length != 0)
                 {
-                    UserId = user.Id,
-                    RestaurantId = restaurant.Id,
-                    Vote = 6.5
-                });
-
-                db.SaveChanges();
-
-                foreach (var vote in user.Votes)
-                {
-                    
+                    return addresses[0].Split(':')[0];
                 }
+            }
 
-            }*/
+            return context.Request.ServerVariables["REMOTE_ADDR"];
         }
 
         protected void email_send_Click(object sender, EventArgs e)

@@ -16,7 +16,15 @@ namespace NeYesekApp
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!this.IsPostBack)
+            {
 
+            }
+
+            if (Session["IsLoggedIn"] != null && Session["IsLoggedIn"] is bool == true)
+            {
+                Response.Redirect("Dashboard.aspx");
+            }
         }
 
         protected void add_button_Click(object sender, EventArgs e)

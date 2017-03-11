@@ -14,6 +14,16 @@ namespace NeYesekApp
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!this.IsPostBack)
+            {
+
+            }
+
+            if (Session["IsLoggedIn"] != null && Session["IsLoggedIn"] is bool == true)
+            {
+                Response.Redirect("Dashboard.aspx");
+            }
+
             /*using (var db = new NeYesekAppContext()) {
 
                 var user = (from d in db.Users where d.Name == "Elif Benli" select d).Single();

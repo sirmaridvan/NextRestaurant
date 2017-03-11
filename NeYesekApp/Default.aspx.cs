@@ -16,7 +16,7 @@ namespace NeYesekApp
         {
             if (!this.IsPostBack)
             {
-                if (Session["IsLoggedIn"] != null && Session["IsLoggedIn"] is bool == true)
+                if (Session["IsLoggedIn"] != null && (Session["IsLoggedIn"] is bool) == true)
                 {
                     Response.Redirect("Dashboard.aspx");
                     return;

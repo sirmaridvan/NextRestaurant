@@ -216,6 +216,8 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Images\bg.jpeg" />
+    <Content Include="Content\jquery-ui-1.10.4.css" />
+    <Content Include="Content\jquery-ui-1.10.4.min.css" />
     <Content Include="Content\Members.css" />
     <Content Include="Content\Register.css" />
     <Content Include="Content\Login.css" />
@@ -238,6 +240,8 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery-ui-1.10.4.js" />
+    <Content Include="Scripts\jquery-ui-1.10.4.min.js" />
     <Content Include="Scripts\Members.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />

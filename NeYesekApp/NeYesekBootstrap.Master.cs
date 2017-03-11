@@ -13,5 +13,12 @@ namespace NeYesekApp
         {
 
         }
+
+        protected void logoutBtn_Click(object sender, EventArgs e)
+        {
+            Session["IsLoggedIn"] = null;
+            Session["Email"] = string.Empty;
+            Response.Redirect("Default.aspx");
+        }
     }
 }

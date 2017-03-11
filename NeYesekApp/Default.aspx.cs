@@ -19,12 +19,12 @@ namespace NeYesekApp
 
             }
 
-            if (Session["IsLoggedIn"] != null && Session["IsLoggedIn"] is bool == true)
+            if (Session["IsLoggedIn"] == null || Session["IsLoggedIn"] is bool == false)
             {
-                Response.Redirect("Dashboard.aspx");
+                Response.Redirect("Default.aspx");
+                return;
             }
-
-            /*using (var db = new NeYesekAppContext()) {
+        }
 
         public string GetUserIP()
         {

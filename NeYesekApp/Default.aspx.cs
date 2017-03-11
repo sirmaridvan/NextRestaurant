@@ -16,7 +16,8 @@ namespace NeYesekApp
         {
             if (!this.IsPostBack)
             {
-
+                var ip = GetUserIP();
+                IPAddress.Text = ip;
             }
 
             if (Session["IsLoggedIn"] != null && Session["IsLoggedIn"] is bool == true)
@@ -24,8 +25,7 @@ namespace NeYesekApp
                 Response.Redirect("Dashboard.aspx");
             }
 
-            /*using (var db = new NeYesekAppContext()) {
-
+        }
         public string GetUserIP()
         {
             System.Web.HttpContext context = System.Web.HttpContext.Current;

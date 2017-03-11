@@ -32,8 +32,15 @@ namespace NeYesekApp
 
                 if(sha1data == user.Hash)
                 {
-
+                    Session["IsLoggedIn"] = true;
+                    Session["Email"] = user.Email;
+                    Response.Redirect("Dashboard.aspx");
+                    return;
                 }
+
+                var loginError = string.Format("Invalid credentials!");
+                Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "Error!", "<script>alert('" + loginError + "');</script>");
+                return;
 
             }
         }

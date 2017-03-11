@@ -14,9 +14,17 @@ namespace NeYesekApp
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            var ip = GetUserIP();
-            IPAddress.Text = ip;
-        }
+            if (!this.IsPostBack)
+            {
+
+            }
+
+            if (Session["IsLoggedIn"] != null && Session["IsLoggedIn"] is bool == true)
+            {
+                Response.Redirect("Dashboard.aspx");
+            }
+
+            /*using (var db = new NeYesekAppContext()) {
 
         public string GetUserIP()
         {

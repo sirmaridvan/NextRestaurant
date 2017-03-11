@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace NeYesekApp
 {
-    public partial class Members : System.Web.UI.Page
+    public partial class Dashboard : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -16,10 +16,6 @@ namespace NeYesekApp
 
             }
 
-            if (Session["IsLoggedIn"] != null && Session["IsLoggedIn"] is bool == true)
-            {
-                Response.Redirect("Dashboard.aspx");
-            }
         }
     }
 }

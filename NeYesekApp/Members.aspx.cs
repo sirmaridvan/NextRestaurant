@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NeYesekApp.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,13 +14,21 @@ namespace NeYesekApp
         {
             if (!this.IsPostBack)
             {
+                if (Session["IsLoggedIn"] == null || Session["IsLoggedIn"] is bool == false)
+                {
+                    Response.Redirect("Default.aspx");
+                    return;
+                }
+
+                using (var ctx = new NeYesekAppContext())
+                {
+                    rptMembers.DataSource = ctx.Users.ToList();
+                    rptMembers.DataBind();
+                }
 
             }
 
-            if (Session["IsLoggedIn"] != null && Session["IsLoggedIn"] is bool == true)
-            {
-                Response.Redirect("Dashboard.aspx");
-            }
+
         }
     }
 }

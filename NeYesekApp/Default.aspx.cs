@@ -16,16 +16,17 @@ namespace NeYesekApp
         {
             if (!this.IsPostBack)
             {
+                if (Session["IsLoggedIn"] != null && Session["IsLoggedIn"] is bool == true)
+                {
+                    Response.Redirect("Dashboard.aspx");
+                    return;
+                }
+
                 var ip = GetUserIP();
                 IPAddress.Text = ip;
             }
-
-            if (Session["IsLoggedIn"] != null && Session["IsLoggedIn"] is bool == true)
-            {
-                Response.Redirect("Dashboard.aspx");
-            }
-
         }
+
         public string GetUserIP()
         {
             System.Web.HttpContext context = System.Web.HttpContext.Current;

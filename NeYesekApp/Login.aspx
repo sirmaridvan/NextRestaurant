@@ -32,7 +32,7 @@
                 <div class="col-md-4 col-md-offset-4">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h3 class="panel-title">Sign In</h3>
+                            <h3 class="panel-title">Login</h3>
                         </div>
                         <div class="panel-body">
                             <fieldset>
@@ -46,7 +46,6 @@
                                     <label>
                                         <asp:CheckBox name="remember" runat="server" type="checkbox" value="Remember Me" />
                                         Remember Me
-			    	    
                                     </label>
                                 </div>
                                 <asp:Button class="btn btn-lg btn-success btn-block" type="submit" Text="Login" runat="server" id="login_button" onclick="login_button_Click" />

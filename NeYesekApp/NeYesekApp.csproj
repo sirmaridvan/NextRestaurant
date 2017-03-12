@@ -223,6 +223,7 @@
     <Content Include="Content\Login.css" />
     <Content Include="Content\NeYesekMaster.css" />
     <Content Include="Content\Restaurants.css" />
+    <Content Include="Content\Votes.css" />
     <Content Include="Dashboard.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -231,6 +232,7 @@
     <Content Include="Login.aspx" />
     <Content Include="Members.aspx" />
     <Content Include="NeYesekBootstrap.Master" />
+    <Content Include="Votes.aspx" />
     <None Include="Properties\PublishProfiles\neyesek - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Register.aspx" />
@@ -395,6 +397,13 @@
     <Compile Include="WeatherService\Region.cs" />
     <Compile Include="WeatherService\TimeZone.cs" />
     <Compile Include="WeatherService\WeatherService.cs" />
+    <Compile Include="Votes.aspx.cs">
+      <DependentUpon>Votes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Votes.aspx.designer.cs">
+      <DependentUpon>Votes.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201703012041427_Initial.resx">

@@ -25,6 +25,6 @@ namespace NeYesekApp.Models
         public string PictureUrl { get; set; }
 
         [InverseProperty("Restaurant")]
-        public virtual ICollection<UserVote> Votes { get; set; }
+        public virtual ICollection<UserVote> Votes { get; set; } 
     }
 }

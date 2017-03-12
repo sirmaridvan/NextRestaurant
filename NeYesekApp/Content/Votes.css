@@ -1,0 +1,14 @@
+﻿div.list-group-item {
+    height:auto;
+    min-height:300px;
+}
+div.list-group-item.active small {
+    color:#fff;
+}
+.stars {
+    margin:20px auto 1px;    
+}
+
+.input-group {
+    margin-bottom:10px;
+}

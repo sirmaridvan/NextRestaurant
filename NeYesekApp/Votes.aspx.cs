@@ -8,7 +8,7 @@ using System.Web.UI.WebControls;
 
 namespace NeYesekApp
 {
-    public partial class Members : System.Web.UI.Page
+    public partial class WebForm1 : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -22,13 +22,11 @@ namespace NeYesekApp
 
                 using (var ctx = new NeYesekAppContext())
                 {
-                    rptMembers.DataSource = ctx.Users.ToList();
-                    rptMembers.DataBind();
+                    rptVotes.DataSource = ctx.Restaurants.ToList();
+                    rptVotes.DataBind();
                 }
 
             }
-
-
         }
     }
 }

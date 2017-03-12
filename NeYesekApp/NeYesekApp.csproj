@@ -215,6 +215,7 @@
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Dashboard.css" />
     <Content Include="Content\Images\bg.jpeg" />
     <Content Include="Content\jquery-ui-1.10.4.css" />
     <Content Include="Content\jquery-ui-1.10.4.min.css" />
@@ -388,13 +389,19 @@
     <Compile Include="ViewSwitcher.ascx.designer.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
     </Compile>
+    <Compile Include="WeatherService\DarkSky.cs" />
     <Compile Include="WeatherService\AccuWeather.cs" />
-    <Compile Include="WeatherService\AdminArea.cs" />
-    <Compile Include="WeatherService\Country.cs" />
-    <Compile Include="WeatherService\GeoPosition.cs" />
-    <Compile Include="WeatherService\Region.cs" />
-    <Compile Include="WeatherService\TimeZone.cs" />
-    <Compile Include="WeatherService\WeatherService.cs" />
+    <Compile Include="WeatherService\Alert.cs" />
+    <Compile Include="WeatherService\CurrentWeather.cs" />
+    <Compile Include="WeatherService\DailyWeather.cs" />
+    <Compile Include="WeatherService\Flags.cs" />
+    <Compile Include="WeatherService\ForecastResult.cs" />
+    <Compile Include="WeatherService\HourlyWeather.cs" />
+    <Compile Include="WeatherService\HourlyWeatherData.cs" />
+    <Compile Include="WeatherService\MinutelyWeather.cs" />
+    <Compile Include="WeatherService\DailyWeatherData.cs" />
+    <Compile Include="WeatherService\MinutelyWeatherData.cs" />
+    <Compile Include="WeatherService\IWeatherService.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201703012041427_Initial.resx">

@@ -10,7 +10,7 @@
 namespace NeYesekApp {
     
     
-    public partial class WebForm1 {
+    public partial class Votes {
         
         /// <summary>
         /// rptVotes control.

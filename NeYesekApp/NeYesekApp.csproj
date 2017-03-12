@@ -233,7 +233,6 @@
     <Content Include="Login.aspx" />
     <Content Include="Members.aspx" />
     <Content Include="NeYesekBootstrap.Master" />
-    <Content Include="Votes.aspx" />
     <None Include="Properties\PublishProfiles\neyesek - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Register.aspx" />
@@ -275,6 +274,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="ViewSwitcher.ascx" />
+    <Content Include="Votes.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -390,6 +390,13 @@
     </Compile>
     <Compile Include="ViewSwitcher.ascx.designer.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Votes.aspx.cs">
+      <DependentUpon>Votes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Votes.aspx.designer.cs">
+      <DependentUpon>Votes.aspx</DependentUpon>
     </Compile>
     <Compile Include="WeatherService\DarkSky.cs" />
     <Compile Include="WeatherService\AccuWeather.cs" />

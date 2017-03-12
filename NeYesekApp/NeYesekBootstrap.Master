@@ -61,7 +61,7 @@
                         <li><a href="/Dashboard.aspx">Home</a></li>
                         <li><a href="/Restaurants/">Restaurants</a></li>
                         <li><a href="/Members.aspx">Members</a></li>
-                        <li><a href="#">Vote</a></li>
+                        <li><a href="/Votes.aspx">Vote</a></li>
                         <li><a href="#">News</a></li>
                         <li><a href="#">Contact</a></li>
                         <li>

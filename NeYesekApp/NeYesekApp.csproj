@@ -350,7 +350,7 @@
     <Compile Include="Migrations\201703012041427_Initial.Designer.cs">
       <DependentUpon>201703012041427_Initial.cs</DependentUpon>
     </Compile>    
-    <Compile Include="Models\Place.cs" />
+    <Compile Include="Place.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\NeYesekAppContext.cs" />
     <Compile Include="Models\Restaurant.cs" />

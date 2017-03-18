@@ -28,5 +28,42 @@ namespace NeYesekApp
 
             }
         }
+        protected void rptVotes_ItemCommand(object sender, RepeaterCommandEventArgs e)
+        {
+            switch (e.CommandName.ToString())
+            {
+                case "Save":
+                    TextBox score = e.Item.FindControl("vote") as TextBox;
+                    Label labelID = e.Item.FindControl("RestaurantID") as Label;
+                    int id = 0;
+                    Int32.TryParse(labelID.Text.ToString(), out id);
+                    double vote = 0;
+                    Double.TryParse(score.Text.ToString(), out vote);
+                    using (var ctx = new NeYesekAppContext())
+                    {
+                        try
+                        {
+                            var userVote = new UserVote()
+                            {
+                                UserId = Convert.ToInt32(Session["Id"]),
+                                RestaurantId = id,
+                                Vote = vote,
+                            };
+                            ctx.UserVotes.Add(userVote);
+                            ctx.SaveChanges();
+                        }
+
+                        catch (Exception ec)
+                        {
+                            Console.WriteLine(ec.Message);
+                        }
+
+                        
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }

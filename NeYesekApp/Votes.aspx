@@ -11,7 +11,7 @@
             <div class="well">
                 <h1 class="text-center">Vote for your restaurant</h1>
                 <div class="list-group">
-                    <asp:Repeater ID="rptVotes" runat="server">
+                    <asp:Repeater ID="rptVotes" runat="server" OnItemCommand="rptVotes_ItemCommand">
                         <HeaderTemplate>
                         </HeaderTemplate>
                         <ItemTemplate>
@@ -34,13 +34,14 @@
                                         <span class="input-group-btn">
                                             <button type="button" id="decreaseButton" class="btn btn-danger">-</button>
                                         </span>
-                                        <input type="text" class="form-control" id="vote" placeholder="Vote" />
+                                        <asp:Label ID="RestaurantName" runat="server" Text='<%# Eval("Name")%>' Visible="false"></asp:Label>
+                                        <asp:Label ID="RestaurantID" runat="server" Text='<%# Eval("ID")%>' Visible="false" ></asp:Label>
+                                        <asp:TextBox ID="vote" runat="server" class="form-control" Text="Vote" /> 
                                         <span class="input-group-btn">
                                             <button type="button" id="increaseButton" class="btn btn-success">+</button>
                                         </span>
-
                                     </div>
-                                    <button type="button" class="btn btn-default btn-lg btn-block">Vote Now! </button>
+                                    <asp:Button ID="SaveVote" class="btn btn-default btn-lg btn-block" CommandName="Save" runat="server" Text="Vote" />
                                     <div class="stars">
                                         <span class="glyphicon glyphicon-star"></span>
                                         <span class="glyphicon glyphicon-star"></span>

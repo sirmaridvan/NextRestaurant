@@ -33,24 +33,88 @@ namespace NeYesekApp
             switch (e.CommandName.ToString())
             {
                 case "Save":
-                    TextBox score = e.Item.FindControl("vote") as TextBox;
-                    Label labelID = e.Item.FindControl("RestaurantID") as Label;
-                    int id = 0;
-                    Int32.TryParse(labelID.Text.ToString(), out id);
+                    TextBox voteTextBox = e.Item.FindControl("Vote") as TextBox;
+                    Label labelId = e.Item.FindControl("RestaurantID") as Label;
+                    int restaurantId = 0;
+                    Int32.TryParse(labelId.Text, out restaurantId);
                     double vote = 0;
-                    Double.TryParse(score.Text.ToString(), out vote);
+                    Double.TryParse(voteTextBox.Text, out vote);
                     using (var ctx = new NeYesekAppContext())
                     {
                         try
                         {
-                            var userVote = new UserVote()
+                            bool isUpdate = true;
+                            var userId = (int)Session["UserId"];
+                            var userVote = ctx.UserVotes.Where(v => v.RestaurantId == restaurantId && v.UserId == userId).SingleOrDefault();
+
+                            if(userVote == null)
                             {
-                                UserId = Convert.ToInt32(Session["Id"]),
-                                RestaurantId = id,
-                                Vote = vote,
-                            };
-                            ctx.UserVotes.Add(userVote);
+                                isUpdate = false;
+                                userVote = new UserVote()
+                                {
+                                    UserId = (int)Session["UserId"],
+                                    RestaurantId = restaurantId,
+                                    Vote = vote,
+                                };
+                            }
+
+                            var user = ctx.Users.Where(u => u.Id == userId).SingleOrDefault();
+
+                            var voteSum = user.Votes.Sum(v => v.Vote);
+
+                            if(isUpdate)
+                            {
+                                if (voteSum - userVote.Vote + vote >= 100)
+                                {
+                                    var message = string.Format("You voted too much! Vote total should be at most 100! Yours is {0}", (voteSum - userVote.Vote + vote));
+                                    Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "Error!", "<script>alert('" + message + "');</script>");
+                                    return;
+                                }
+
+                                var restaurant = ctx.Restaurants.Where(r => r.Id == restaurantId).SingleOrDefault();
+
+                                var score = restaurant.Score;
+
+                                score = score * (restaurant.Votes.Count);
+
+                                score = score - userVote.Vote + vote;
+
+                                score = score / (restaurant.Votes.Count);
+
+                                restaurant.Score = score;
+
+                                userVote.Vote = vote;
+
+                            } else
+                            {
+                                if (voteSum + vote >= 100)
+                                {
+                                    var message = string.Format("You voted too much! Vote total should be at most 100! Yours is {0}", (voteSum + vote));
+                                    Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "Error!", "<script>alert('" + message + "');</script>");
+                                    return;
+                                }
+
+                                ctx.UserVotes.Add(userVote);
+
+                                var restaurant = ctx.Restaurants.Where(r => r.Id == restaurantId).SingleOrDefault();
+
+                                var score = restaurant.Score;
+
+                                score = score * (restaurant.Votes.Count - 1);
+
+                                score = score + vote;
+
+                                score = score / (restaurant.Votes.Count);
+
+                                restaurant.Score = score;
+
+                            }
+
                             ctx.SaveChanges();
+
+                            rptVotes.DataSource = ctx.Restaurants.ToList();
+
+                            rptVotes.DataBind();
                         }
 
                         catch (Exception ec)
@@ -63,6 +127,26 @@ namespace NeYesekApp
                     break;
                 default:
                     break;
+            }
+        }
+
+        protected void rptVotes_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                var rest = (Restaurant) e.Item.DataItem;
+                using(var ctx = new NeYesekAppContext())
+                {
+                    var userId = (int)Session["UserId"];
+                    var vote = ctx.UserVotes.Where(v => v.UserId == userId && v.RestaurantId == rest.Id).SingleOrDefault();
+                    if(vote == null)
+                    {
+                        ((TextBox)e.Item.FindControl("Vote")).Text = "0";
+                    } else
+                    {
+                        ((TextBox)e.Item.FindControl("Vote")).Text = vote.Vote.ToString();
+                    }
+                }
             }
         }
     }

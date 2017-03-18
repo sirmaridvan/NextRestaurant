@@ -26,8 +26,8 @@ namespace NeYesekApp
                     Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "Error!", "<script>alert('" + message + "');</script>");
                     return;
                 }
-
-                if(ctx.Users.Where(x=> x.Email == register_email.Text).Single() != null)
+                var returnedUser = ctx.Users.Where(x => x.Email == register_email.Text).SingleOrDefault();
+                if (returnedUser != null)
                 {
                     var message = string.Format("User with email {0} already exists!", register_email.Text);
                     Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "Error!", "<script>alert('" + message+ "');</script>");
@@ -47,6 +47,8 @@ namespace NeYesekApp
                 ctx.Users.Add(user);
 
                 ctx.SaveChanges();
+
+                Response.Redirect("/Login.aspx");
             }
 
         }

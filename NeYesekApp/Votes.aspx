@@ -11,7 +11,7 @@
             <div class="well">
                 <h1 class="text-center">Vote for your restaurant</h1>
                 <div class="list-group">
-                    <asp:Repeater ID="rptVotes" runat="server" OnItemCommand="rptVotes_ItemCommand">
+                    <asp:Repeater ID="rptVotes" runat="server" OnItemCommand="rptVotes_ItemCommand" OnItemDataBound="rptVotes_ItemDataBound">
                         <HeaderTemplate>
                         </HeaderTemplate>
                         <ItemTemplate>
@@ -22,7 +22,7 @@
                                     </figure>
                                 </div>
                                 <div class="col-md-6">
-                                    <h4 class="list-group-item-heading"></h4>
+                                    <h4 class="list-group-item-heading"><%# Eval("Name")%></h4>
                                     <p class="list-group-item-text">
                                         Qui diam libris ei, vidisse incorrupte at mel. His euismod salutandi dissentiunt eu. Habeo offendit ea mea. Nostro blandit sea ea, viris timeam molestiae an has. At nisl platonem eum. 
                         Vel et nonumy gubergren, ad has tota facilis probatus. Ea legere legimus tibique cum, sale tantas vim ea, eu vivendo expetendis vim. Voluptua vituperatoribus et mel, ius no elitr deserunt mediocrem. Mea facilisi torquatos ad.
@@ -32,13 +32,12 @@
                                     <h2><%# Eval("Votes.Count")%> <small>votes </small></h2>
                                     <div class="input-group">
                                         <span class="input-group-btn">
-                                            <button type="button" id="decreaseButton" class="btn btn-danger">-</button>
+                                            <button type="button" class="btn btn-danger decreaseButton">-</button>
                                         </span>
-                                        <asp:Label ID="RestaurantName" runat="server" Text='<%# Eval("Name")%>' Visible="false"></asp:Label>
                                         <asp:Label ID="RestaurantID" runat="server" Text='<%# Eval("ID")%>' Visible="false" ></asp:Label>
-                                        <asp:TextBox ID="vote" runat="server" class="form-control" Text="Vote" /> 
+                                        <asp:TextBox ID="Vote" runat="server" CssClass="form-control vote" style="text-align: center" /> 
                                         <span class="input-group-btn">
-                                            <button type="button" id="increaseButton" class="btn btn-success">+</button>
+                                            <button type="button" class="btn btn-success increaseButton">+</button>
                                         </span>
                                     </div>
                                     <asp:Button ID="SaveVote" class="btn btn-default btn-lg btn-block" CommandName="Save" runat="server" Text="Vote" />
@@ -60,20 +59,25 @@
     </div>
 
     <script>
-        $("#vote").val('0');
         // Create a click handler for your increment button
-        $("#increaseButton").click(function () {
-            var newValue = 1 + parseInt($("#vote").val());
+        $(".increaseButton").click(function (event) {
+            var value = parseInt($(event.target).parent().parent().find(".form-control.vote").val());
+            if (isNaN(value))
+                value = 0;
+            var newValue = value + 1;
             if (newValue > 100)
                 newValue = 100;
-            $("#vote").val(newValue);
+            $(event.target).parent().parent().find(".form-control.vote").val(newValue);
         });
         // .. and your decrement button
-        $("#decreaseButton").click(function () {
-            var newValue = parseInt($("#vote").val()) - 1;
+        $(".decreaseButton").click(function () {
+            var value = parseInt($(event.target).parent().parent().find(".form-control.vote").val());
+            if (isNaN(value))
+                value = 0;
+            var newValue = value - 1;
             if (newValue < 0)
                 newValue = 0;
-            $("#vote").val(newValue);
+            $(event.target).parent().parent().find(".form-control.vote").val(newValue);
         });
     </script>
 </asp:Content>

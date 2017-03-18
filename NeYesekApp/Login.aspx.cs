@@ -34,6 +34,7 @@ namespace NeYesekApp
                 {
                     Session["IsLoggedIn"] = true;
                     Session["Email"] = user.Email;
+                    Session["UserId"] = user.Id;
                     Response.Redirect("Dashboard.aspx");
                     return;
                 }

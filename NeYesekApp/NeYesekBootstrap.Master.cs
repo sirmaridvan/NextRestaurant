@@ -18,6 +18,7 @@ namespace NeYesekApp
         {
             Session["IsLoggedIn"] = null;
             Session["Email"] = string.Empty;
+            Session["UserId"] = 0;
             Response.Redirect("Default.aspx");
         }
     }

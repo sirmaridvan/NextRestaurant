@@ -11,12 +11,12 @@
             <div id="card" class="weater">
                 <div class="city-selected">
                     <article>
-
+                        
                         <div class="info">
-                            <div class="city"><span>City:</span> Skopje</div>
+                            <div class="city"><span>City:</span> İstanbul</div>
                             <div class="night">Night - 22:07 PM</div>
 
-                            <div class="temp">3°</div>
+                            <asp:Label ID="temperature" runat="server" class="temp"></asp:Label>
 
                             <div class="wind">
                                 <svg version="1.1" id="wind" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -52,7 +52,7 @@
                                         </g>
                                     </g>
 
-                                    <span>25 km/h</span>
+                                    <asp:Label ID="windSpeed" runat="server"></asp:Label>
                             </div>
                         </div>
 
@@ -93,8 +93,8 @@
                 <div class="days">
                     <div class="row row-no-gutter">
                         <div class="col-md-4">
-                            <div class="day">
-                                <h1>Monday</h1>
+                            <asp:Panel class="day" onclick="todayClick" runat="server">
+                                <h1>Today</h1>
                                 <svg version="1.1" id="icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 59.077 59.077" style="enable-background: new 0 0 59.077 59.077;" xml:space="preserve">
                                     <g>
                                         <path d="M55.906,28.463c-0.235,0.129-0.469,0.258-0.711,0.379c-11.339,5.68-25.186,1.072-30.864-10.268
@@ -125,12 +125,12 @@
                                         </path>
                                     </g>
                                 </svg>
-                            </div>
+                            </asp:Panel>
                         </div>
 
                         <div class="col-md-4">
-                            <div class="day">
-                                <h1>Tuesday</h1>
+                            <asp:Panel class="day" onclick="tomorrowClick" runat="server">
+                                <h1>Tomorrow</h1>
                                 <svg version="1.1" id="icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 59.077 59.077" style="enable-background: new 0 0 59.077 59.077;" xml:space="preserve">
                                     <g>
                                         <path d="M55.906,28.463c-0.235,0.129-0.469,0.258-0.711,0.379c-11.339,5.68-25.186,1.072-30.864-10.268
@@ -161,12 +161,12 @@
                                         </path>
                                     </g>
                                 </svg>
-                            </div>
+                            </asp:Panel>
                         </div>
 
                         <div class="col-md-4">
-                            <div class="day">
-                                <h1>Wednesday</h1>
+                            <asp:Panel class="day" runat="server">
+                                <h1>Next Day</h1>
                                 <svg version="1.1" id="icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 59.077 59.077" style="enable-background: new 0 0 59.077 59.077;" xml:space="preserve">
                                     <g>
                                         <path d="M55.906,28.463c-0.235,0.129-0.469,0.258-0.711,0.379c-11.339,5.68-25.186,1.072-30.864-10.268
@@ -197,7 +197,7 @@
                                         </path>
                                     </g>
                                 </svg>
-                            </div>
+                            </asp:Panel>
                         </div>
 
                     </div>

@@ -10,6 +10,6 @@ namespace NeYesekApp.WeatherService
     interface IWeatherService
     {
         [Get("/forecast/{apikey}/{latitude},{longtitude}")]
-        Task<ForecastResult> GetForecast([AliasAs("apikey")]string apiKey, [AliasAs("latitude")]double latitude, [AliasAs("longtitude")]double longtitude);
+        Task<ForecastResult> GetForecast([AliasAs("apikey")]string apiKey, [AliasAs("latitude")]double latitude, [AliasAs("longtitude")]double longtitude, [AliasAs("units")]string unit);
     }
 }

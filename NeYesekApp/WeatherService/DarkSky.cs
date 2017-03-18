@@ -13,5 +13,7 @@ namespace NeYesekApp.WeatherService
 
         public const double IstanbulLatitude = 41.0082;
         public const double IstanbulLongtitude = 28.9784;
+
+        public const string SI_UNIT = "si";
     }
 }

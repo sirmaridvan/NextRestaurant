@@ -9,7 +9,8 @@
     <script src="Scripts/bootstrap.js"></script>
     <link href="Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="Content/Register.css" rel="stylesheet" type="text/css" />
-
+    
+    <link rel="shortcut icon" type="image/x-icon" href="/icon.png" />
     <script>
         $(document).ready(function () {
             $(document).mousemove(function (e) {

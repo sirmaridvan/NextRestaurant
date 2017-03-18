@@ -16,6 +16,7 @@
     <script src="/Scripts/jquery-ui-1.10.4.min.js"></script>
     <script src="/Scripts/bootstrap.min.js"></script>
 
+    <link rel="shortcut icon" type="image/x-icon" href="/icon.png" />
     <!--<webopt:BundleReference runat="server" Path="~/Content/css" />-->
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>

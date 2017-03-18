@@ -13,7 +13,26 @@ namespace NeYesekApp
 {
     public partial class Dashboard : System.Web.UI.Page
     {
-        DailyWeatherData todayData = null , tomorrowData = null , nextDayData = null;
+        private static DailyWeatherData todayData = null , tomorrowData = null , nextDayData = null;
+
+        protected void todayButton_Click(object sender, EventArgs e)
+        {
+            temperature.Text = ((int)todayData.temperatureMax) + "°";
+            windSpeed.Text = ((int)todayData.windSpeed) + " km/h";
+        }
+
+        protected void tomorrowButton_Click(object sender, EventArgs e)
+        {
+            temperature.Text = ((int)tomorrowData.temperatureMax) + "°";
+            windSpeed.Text = ((int)tomorrowData.windSpeed) + " km/h";
+        }
+
+        protected void nextDayButton_Click(object sender, EventArgs e)
+        {
+            temperature.Text = ((int)nextDayData.temperatureMax) + "°";
+            windSpeed.Text = ((int)nextDayData.windSpeed) + " km/h";
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["IsLoggedIn"] == null || Session["IsLoggedIn"] is bool == false)

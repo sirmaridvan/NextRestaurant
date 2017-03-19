@@ -11,7 +11,6 @@
             <div id="card" class="weater">
                 <div class="city-selected">
                     <article>
-
                         <div class="info">
                             <div class="city"><span>City:</span> İstanbul</div>
                             <div class="night"><%: DateTime.Now.ToString("dd'/'MM'/'yyyy HH:mm") %></div>
@@ -206,6 +205,18 @@
             <asp:Button runat="server" ID="todayButton" ClientIDMode="Static" Style="visibility: hidden; height: 0px" OnClick="todayButton_Click" />
             <asp:Button runat="server" ID="tomorrowButton" ClientIDMode="Static" Style="visibility: hidden; height: 0px" OnClick="tomorrowButton_Click" />
             <asp:Button runat="server" ID="nextDayButton" ClientIDMode="Static" Style="visibility: hidden; height: 0px" OnClick="nextDayButton_Click" />
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 col-md-6">
+                    <div class="alert-message alert-message-default">
+                        <h4>It's time for lunch! :)</h4>
+                        <p>
+                            <asp:Label ID="restaurant" runat="server" class="temp"></asp:Label>
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <script type="text/javascript">

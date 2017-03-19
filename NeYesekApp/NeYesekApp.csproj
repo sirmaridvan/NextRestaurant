@@ -307,13 +307,6 @@
     </Compile>
     <Compile Include="Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
-    </Compile>    
-    <Compile Include="StartThePlanning.aspx.cs">
-      <DependentUpon>StartThePlanning.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="StartThePlanning.aspx.designer.cs">
-      <DependentUpon>StartThePlanning.aspx</DependentUpon>
     </Compile>
     <Compile Include="Dashboard.aspx.cs">
       <DependentUpon>Dashboard.aspx</DependentUpon>
@@ -350,7 +343,8 @@
     <Compile Include="Migrations\201703012041427_Initial.cs" />
     <Compile Include="Migrations\201703012041427_Initial.Designer.cs">
       <DependentUpon>201703012041427_Initial.cs</DependentUpon>
-    </Compile>    
+    </Compile>
+    <Compile Include="Models\RestaurantScheduleInfo.cs" />
     <Compile Include="Place.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\NeYesekAppContext.cs" />

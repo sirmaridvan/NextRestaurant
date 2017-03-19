@@ -13,7 +13,8 @@ namespace NeYesekApp
 {
     public partial class Dashboard : System.Web.UI.Page
     {
-        private static DailyWeatherData todayData = null , tomorrowData = null , nextDayData = null;
+        private static DailyWeatherData todayData = null, tomorrowData = null, nextDayData = null;
+        private static string restaurantName = "";
 
         protected void todayButton_Click(object sender, EventArgs e)
         {
@@ -49,15 +50,21 @@ namespace NeYesekApp
         {
             var weatherService = RestService.For<IWeatherService>(DarkSky.BaseUrl);
             var forecastResult = await weatherService.GetForecast(DarkSky.ApiKey, DarkSky.IstanbulLatitude, DarkSky.IstanbulLongtitude, DarkSky.SI_UNIT);
-            if(forecastResult != null)
+            if (forecastResult != null)
             {
                 todayData = forecastResult.daily.data[0];
                 tomorrowData = forecastResult.daily.data[1];
                 nextDayData = forecastResult.daily.data[2];
 
-                temperature.Text = ((int) todayData.temperatureMax) + "°";
+                temperature.Text = ((int)todayData.temperatureMax) + "°";
+                restaurant.Text = "Here is your restaurant today: "+restaurantName;
                 windSpeed.Text = ((int)todayData.windSpeed) + " km/h";
             }
+        }
+
+        static public void setDailyRestaurant(string restaurantName)
+        {
+            Dashboard.restaurantName = restaurantName;
         }
     }
 }

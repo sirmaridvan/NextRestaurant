@@ -7,15 +7,20 @@ namespace NeYesekApp
 {
     public class Place
     {
+        public int id;
         public string name;
         public int vote;
         public bool enable;
         public int disableDay;
-        public Place(string name, int vote, bool enable)
+        public bool IsValidForWalking;
+        public Place(int id, string name, int vote, bool enable,bool isWalidForWalking,int disableDay)
         {
+            this.id = id;
             this.name = name;
             this.vote = vote;
             this.enable = enable;
+            this.IsValidForWalking = isWalidForWalking;
+            this.disableDay = disableDay;
         }
         public void disable(int disableDay)
         {

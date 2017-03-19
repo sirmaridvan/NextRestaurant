@@ -13,6 +13,7 @@ namespace NeYesekApp
             var settings = new FriendlyUrlSettings();
             settings.AutoRedirectMode = RedirectMode.Permanent;
             routes.EnableFriendlyUrls(settings);
+            routes.MapPageRoute("RestuarantDetailsRoute", "Restaurants/{restaurantId}","~/Restaurants/Details.aspx");
         }
     }
 }

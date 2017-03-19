@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/NeYesekBootstrap.Master" AutoEventWireup="true" CodeBehind="Add.aspx.cs" Inherits="NeYesekApp.RestaurantAdd" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/NeYesekBootstrap.Master" AutoEventWireup="true" CodeBehind="Details.aspx.cs" Inherits="NeYesekApp.RestaurantDetails" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="title" runat="server">
 </asp:Content>
@@ -23,7 +23,7 @@
         <div class="col-md-4 col-md-offset-4">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Update Restaurant</h3>
+                    <h3 class="panel-title">Add Restaurant</h3>
                 </div>
                 <div class="panel-body">
                     <fieldset>
@@ -46,7 +46,7 @@
                                 Is the restaurant available for walking?
                             </label>
                         </div>
-                        <asp:Button class="btn btn-lg btn-success btn-block" type="submit" Text="Add" runat="server" ID="add_button" OnClick="add_button_Click" />
+                        <asp:Button class="btn btn-lg btn-success btn-block" type="submit" Text="Update" runat="server" ID="update_button" OnClick="update_button_Click" />
                     </fieldset>
                 </div>
             </div>

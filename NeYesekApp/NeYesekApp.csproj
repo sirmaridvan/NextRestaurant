@@ -215,6 +215,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Dashboard.css" />
+    <Content Include="Content\Default.css" />
     <Content Include="Content\Images\bg.jpeg" />
     <Content Include="Content\jquery-ui-1.10.4.css" />
     <Content Include="Content\jquery-ui-1.10.4.min.css" />
@@ -237,6 +238,7 @@
     <None Include="Properties\PublishProfiles\neyesek - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Register.aspx" />
+    <Content Include="Restaurants\Details.aspx" />
     <Content Include="Restaurants\Add.aspx" />
     <Content Include="Restaurants\Default.aspx" />
     <Content Include="Scripts\bootstrap.js" />
@@ -307,7 +309,14 @@
     </Compile>
     <Compile Include="Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
-    </Compile>    
+    </Compile>
+    <Compile Include="Restaurants\Details.aspx.cs">
+      <DependentUpon>Details.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Restaurants\Details.aspx.designer.cs">
+      <DependentUpon>Details.aspx</DependentUpon>
+    </Compile>
     <Compile Include="StartThePlanning.aspx.cs">
       <DependentUpon>StartThePlanning.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -350,7 +359,7 @@
     <Compile Include="Migrations\201703012041427_Initial.cs" />
     <Compile Include="Migrations\201703012041427_Initial.Designer.cs">
       <DependentUpon>201703012041427_Initial.cs</DependentUpon>
-    </Compile>    
+    </Compile>
     <Compile Include="Place.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\NeYesekAppContext.cs" />

@@ -14,6 +14,7 @@ namespace NeYesekApp
 {
     public class Global : HttpApplication
     {
+
         public const String SEND_EMAIL = "SendMail";
         public const String CALCULATE_NEW_RESTAURANTS = "CalculateRestaurants";
 

@@ -20,7 +20,7 @@
                         <div class="portfolio_images_overlay text-center">
                             <h6><%# Eval("Name")%></h6>
                             <p class="product_price"><%# Eval("Score")%></p>
-                            <a href="#" class="btn btn-primary">Details</a>
+                            <a href="<%# "/Restaurants/" + Eval("Id") %>" class="btn btn-primary">Details</a>
                         </div>
                     </div>
                 </ItemTemplate>

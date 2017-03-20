@@ -15,10 +15,7 @@ namespace NeYesekApp.Models
 
         public bool Enable { get; set; }
 
-        public int DisableDay { get; set; }
-
-        [ForeignKey("Restaurant")]
-        public int RestaurantId { get; set; }
+        public int DisableDay { get; set; } 
         public virtual Restaurant Restaurant { get; set; }
     }
 }

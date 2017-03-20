@@ -26,8 +26,9 @@ namespace NeYesekApp.Models
         public System.Data.Entity.DbSet<NeYesekApp.Models.UserVote> UserVotes { get; set; }
         public System.Data.Entity.DbSet<NeYesekApp.Models.RestaurantScheduleInfo> RestaurantScheduleInfos { get; set; }
 
-        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        //{
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Restaurant>().HasRequired<RestaurantScheduleInfo>(r => r.ScheduleInformation).WithOptional(s => s.Restaurant).WillCascadeOnDelete(false);
         //    modelBuilder.Entity<User>()
         //        .HasMany<UserVote>(u => u.Votes)
         //        .WithRequired(v => v.User);
@@ -35,6 +36,6 @@ namespace NeYesekApp.Models
         //    modelBuilder.Entity<Restaurant>()
         //        .HasMany<UserVote>(u => u.Votes)
         //        .WithRequired(v => v.Restaurant);
-        //}
+        }
     }
 }

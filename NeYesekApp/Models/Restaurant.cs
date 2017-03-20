@@ -25,8 +25,7 @@ namespace NeYesekApp.Models
         public string PictureUrl { get; set; }
         
         public virtual ICollection<UserVote> Votes { get; set; }
-        
-        [Required]
+
         public RestaurantScheduleInfo ScheduleInformation { get; set; }
     }
 }

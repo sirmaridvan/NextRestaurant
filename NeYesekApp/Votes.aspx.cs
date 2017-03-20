@@ -33,32 +33,42 @@ namespace NeYesekApp
             switch (e.CommandName.ToString())
             {
                 case "Save":
+                    if(!Global.IsVotingEnabled)
+                    {
+                        var message = string.Format("Voting is not enabled right now!");
+                        Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "Error!", "<script>alert('" + message + "');</script>");
+                        return;
+                    }
+
                     TextBox voteTextBox = e.Item.FindControl("Vote") as TextBox;
                     Label labelId = e.Item.FindControl("RestaurantID") as Label;
                     int restaurantId = 0;
                     Int32.TryParse(labelId.Text, out restaurantId);
                     double vote = 0;
                     Double.TryParse(voteTextBox.Text, out vote);
+
                     using (var ctx = new NeYesekAppContext())
                     {
                         try
                         {
                             bool isUpdate = true;
                             var userId = (int)Session["UserId"];
-                            var userVote = ctx.UserVotes.Where(v => v.RestaurantId == restaurantId && v.UserId == userId).SingleOrDefault();
+                            var userVote = ctx.UserVotes.Where(v => v.Restaurant.Id == restaurantId && v.User.Id == userId).SingleOrDefault();
+
+                            var user = ctx.Users.Where(u => u.Id == userId).SingleOrDefault();
+
+                            var restaurant = ctx.Restaurants.Include("ScheduleInformation").Where(r => r.Id == restaurantId).SingleOrDefault();
 
                             if(userVote == null)
                             {
                                 isUpdate = false;
                                 userVote = new UserVote()
                                 {
-                                    UserId = (int)Session["UserId"],
-                                    RestaurantId = restaurantId,
+                                    User = user,
+                                    Restaurant = restaurant,
                                     Vote = vote,
                                 };
                             }
-
-                            var user = ctx.Users.Where(u => u.Id == userId).SingleOrDefault();
 
                             var voteSum = user.Votes.Sum(v => v.Vote);
 
@@ -70,9 +80,7 @@ namespace NeYesekApp
                                     Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "Error!", "<script>alert('" + message + "');</script>");
                                     return;
                                 }
-
-                                var restaurant = ctx.Restaurants.Where(r => r.Id == restaurantId).SingleOrDefault();
-
+                                
                                 var score = restaurant.Score;
 
                                 score = score * (restaurant.Votes.Count);
@@ -95,9 +103,7 @@ namespace NeYesekApp
                                 }
 
                                 ctx.UserVotes.Add(userVote);
-
-                                var restaurant = ctx.Restaurants.Where(r => r.Id == restaurantId).SingleOrDefault();
-
+                                
                                 var score = restaurant.Score;
 
                                 score = score * (restaurant.Votes.Count - 1);
@@ -138,7 +144,7 @@ namespace NeYesekApp
                 using(var ctx = new NeYesekAppContext())
                 {
                     var userId = (int)Session["UserId"];
-                    var vote = ctx.UserVotes.Where(v => v.UserId == userId && v.RestaurantId == rest.Id).SingleOrDefault();
+                    var vote = ctx.UserVotes.Where(v => v.User.Id == userId && v.Restaurant.Id == rest.Id).SingleOrDefault();
                     if(vote == null)
                     {
                         ((TextBox)e.Item.FindControl("Vote")).Text = "0";

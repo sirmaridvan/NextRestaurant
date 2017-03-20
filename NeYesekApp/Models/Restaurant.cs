@@ -18,13 +18,15 @@ namespace NeYesekApp.Models
         public bool IsValidForWalking { get; set; }
 
         public bool IsOpen { get; set; }
-        
+
         [Index]
         public double Score { get; set; }
 
         public string PictureUrl { get; set; }
-
-        [InverseProperty("Restaurant")]
-        public virtual ICollection<UserVote> Votes { get; set; } 
+        
+        public virtual ICollection<UserVote> Votes { get; set; }
+        
+        [Required]
+        public RestaurantScheduleInfo ScheduleInformation { get; set; }
     }
 }

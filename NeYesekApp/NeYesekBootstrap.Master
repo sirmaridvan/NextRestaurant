@@ -59,40 +59,47 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="navbar-collapse-4">
                     <ul class="nav navbar-nav navbar-right">
-                        <%if ((Session["IsLoggedIn"] is bool) == true) { %>
-                            <li><a href="/Dashboard.aspx">Home</a></li>
-                            <li><a href="/Restaurants/">Restaurants</a></li>
-                            <li><a href="/Members.aspx">Members</a></li>
-                            <li><a href="/Votes.aspx">Votes</a></li>
+                        <%if ((Session["IsLoggedIn"] is bool) == true)
+                            { %>
+                        <li><a href="/Dashboard.aspx">Home</a></li>
+                        <li><a href="/Restaurants/">Restaurants</a></li>
+                        <li><a href="/Members.aspx">Members</a></li>
+                        <li><a href="/Votes.aspx">Votes</a></li>
+                        <li><a href="#" id="startVoting">Start Voting</a></li>
                         <% } %>
-                            <li><a href="/About.aspx">About Us</a></li>
-                            <li><a href="/Contact.aspx">Contact</a></li>
+                        <li><a href="/About.aspx">About Us</a></li>
                         <li>
-                            <%if ((Session["IsLoggedIn"] is bool) == true) { %>
-                                <a class="btn btn-default btn-outline btn-circle" data-toggle="collapse" href="#nav-collapse4" aria-expanded="false" aria-controls="nav-collapse4">Profile <i class=""></i></a>
-                            <%} else { %>
-                                <a class="btn btn-default btn-outline btn-circle" data-toggle="collapse" href="#nav-collapse4" aria-expanded="false" aria-controls="nav-collapse4">Login <i class=""></i></a>
+                            <%if ((Session["IsLoggedIn"] is bool) == true)
+                                { %>
+                            <a class="btn btn-default btn-outline btn-circle" data-toggle="collapse" href="#nav-collapse4" aria-expanded="false" aria-controls="nav-collapse4">Profile <i class=""></i></a>
+                            <%}
+                            else
+                            { %>
+                            <a class="btn btn-default btn-outline btn-circle" data-toggle="collapse" href="#nav-collapse4" aria-expanded="false" aria-controls="nav-collapse4">Login <i class=""></i></a>
                             <% } %>
                         </li>
                     </ul>
                     <ul class="collapse nav navbar-nav nav-collapse" role="search" id="nav-collapse4">
-                            <%if ((Session["IsLoggedIn"] is bool) == true) { %>
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><%: Session["Email"] as string %><span class="caret"></span></a>
-                                    <ul class="dropdown-menu" role="menu">
-                                        <li><a href="#">My profile</a></li>
-                                        <li><a href="#">Favorited</a></li>
-                                        <li><a href="#">Settings</a></li>
-                                        <li class="divider"></li>
-                                        <li>
-                                            <asp:LinkButton runat="server" Text="Logout" ID="logoutBtn" OnClick="logoutBtn_Click"></asp:LinkButton></li>
-                                    </ul>
-                                </li>
-                            <%} else { %>
-                                <li><a href="#">Support</a></li>
-                                <li><a href="/Login.aspx">Login</a></li>
-                                <li><a href="/Register.aspx">Signup</a></li>                                
-                            <% } %>
+                        <%if ((Session["IsLoggedIn"] is bool) == true)
+                            { %>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><%: Session["Email"] as string %><span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">My profile</a></li>
+                                <li><a href="#">Favorited</a></li>
+                                <li><a href="#">Settings</a></li>
+                                <li class="divider"></li>
+                                <li>
+                                    <asp:LinkButton runat="server" Text="Logout" ID="logoutBtn" OnClick="logoutBtn_Click"></asp:LinkButton></li>
+                            </ul>
+                        </li>
+                        <%}
+                        else
+                        { %>
+                        <li><a href="#">Support</a></li>
+                        <li><a href="/Login.aspx">Login</a></li>
+                        <li><a href="/Register.aspx">Signup</a></li>
+                        <% } %>
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->
@@ -105,6 +112,18 @@
             <asp:ContentPlaceHolder ID="main" runat="server">
             </asp:ContentPlaceHolder>
         </div>
+        <asp:Button runat="server" ID="startVotingButton" ClientIDMode="Static" Style="visibility: hidden; height: 0px" OnClientClick="return startVotingButtonClick()" OnClick="startVotingButton_Click" />
+            
     </form>
+    <script type="text/javascript">
+        $("#startVoting").click(function () {
+            $("#startVotingButton").click();
+            return false;
+        });
+        function startVotingButtonClick() {
+            var confirmed = confirm("Are you sure you want to start voting? This operation will reset everything and it cannot be undone!");
+            return confirmed;
+        }
+    </script>
 </body>
 </html>

@@ -7,8 +7,6 @@ using System.Web;
 using System.Web.Caching;
 using System.Web.Optimization;
 using System.Web.Routing;
-using System.Web.Security;
-using System.Web.SessionState;
 using NeYesekApp.WeatherService;
 using Refit;
 using System.Threading.Tasks;
@@ -17,9 +15,14 @@ namespace NeYesekApp
 {
     public class Global : HttpApplication
     {
-
+        //Cache consts
         public const String SEND_EMAIL = "SendMail";
         public const String CALCULATE_NEW_RESTAURANTS = "CalculateNextRestaurants";
+        public const String VOTING = "Voting";
+
+        //for voting page
+        public static bool IsVotingEnabled = false;
+
         private static DailyWeatherData todayData = null;
         private String restaurant="";
 
@@ -28,14 +31,23 @@ namespace NeYesekApp
             // Code that runs on application startup
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            DoSendMailTask(10);
-            DoCalculateNextRestaurantsTask(10);
+
+
+            //DoSendMailTask(10);
+            //DoCalculateNextRestaurantsTask(10);
             await GetWeatherInformation();
             CalculateNextRestaurants();
             Dashboard.setDailyRestaurant(restaurant);
         }
 
-        private void DoSendMailTask(int hours)
+        private static void DoVotingEndedTask()
+        {
+            IsVotingEnabled = false;
+
+            //Burada restaurant lar eklenecek vs vs
+        }
+
+        private static void DoSendMailTask(int hours)
         {
             var OnCacheRemove = new CacheItemRemovedCallback(CacheItemRemoved);
 
@@ -52,7 +64,7 @@ namespace NeYesekApp
                     CacheItemPriority.NotRemovable, OnCacheRemove);
             }
         }
-        private void DoCalculateNextRestaurantsTask(int hours)
+        private static void DoCalculateNextRestaurantsTask(int hours)
         {
             var OnCacheRemove = new CacheItemRemovedCallback(CacheItemRemoved);
 
@@ -73,20 +85,17 @@ namespace NeYesekApp
         private void CalculateNextRestaurants()
         {
             List<Restaurant> listRestaurantDB;
-            List<RestaurantScheduleInfo> listRestaurantSchedule;
             using (var ctx = new NeYesekAppContext())
             {
-                listRestaurantDB = ctx.Restaurants.ToList();
-                listRestaurantSchedule = ctx.RestaurantScheduleInfos.ToList();
-                ctx.SaveChanges();
+                listRestaurantDB = ctx.Restaurants.Include("ScheduleInformation").ToList();
             }
             //veritabanındaki restoran formatından, algoritma için istediğimiz restoran formatına geçiş
-            List<Place> allRestaurant = new List<Place>();
+            List<Place> allRestaurants = new List<Place>();
 
             //Bu yorum bloğu içerisindeki döngü veritabanındaki restoranlara oylama eklendiğinde aktif edilecek. Bunun yerine şimdilik el ile doldurulmuş bir liste kullanılacak.
             for (int i = 0; i < listRestaurantDB.Count; i++)
             {
-                allRestaurant.Add(new Place(listRestaurantDB[i].Id,listRestaurantDB[i].Name, Convert.ToInt32(listRestaurantSchedule[i].Possibility), listRestaurantSchedule[i].Enable, listRestaurantDB[i].IsValidForWalking,listRestaurantSchedule[i].DisableDay));
+                allRestaurants.Add(new Place(listRestaurantDB[i].Id,listRestaurantDB[i].Name, Convert.ToInt32(listRestaurantDB[i].ScheduleInformation.Possibility), listRestaurantDB[i].ScheduleInformation.Enable, listRestaurantDB[i].IsValidForWalking, listRestaurantDB[i].ScheduleInformation.DisableDay));
             }
 
             string result = "";
@@ -96,22 +105,22 @@ namespace NeYesekApp
             //Seçimin yapılması istendiği gün için uygun olan restoranlar "available" listesine aktarılacak.
             //Uygun restoranların toplam dilimin yüzde kaçını kapladığı hesaplanacak."totalcapacity"
             int totalCapacity = 0;
-            for (int j = 0; j < allRestaurant.Count; j++)
+            for (int j = 0; j < allRestaurants.Count; j++)
             {
                 if (todayData.icon == "rain")
                 {
-                    if (allRestaurant[j].isEnable() && allRestaurant[j].IsValidForWalking)
+                    if (allRestaurants[j].isEnable() && allRestaurants[j].IsValidForWalking)
                     {
-                        availableRestaurants.Add(allRestaurant[j]);
-                        totalCapacity += allRestaurant[j].vote;
+                        availableRestaurants.Add(allRestaurants[j]);
+                        totalCapacity += allRestaurants[j].vote;
                     }
                 }
                 else
                 {
-                    if (allRestaurant[j].isEnable())
+                    if (allRestaurants[j].isEnable())
                     {
-                        availableRestaurants.Add(allRestaurant[j]);
-                        totalCapacity += allRestaurant[j].vote;
+                        availableRestaurants.Add(allRestaurants[j]);
+                        totalCapacity += allRestaurants[j].vote;
                     }
                 }
             }
@@ -119,6 +128,7 @@ namespace NeYesekApp
             {
                 //Eğer totalcapacity sıfır ise 100 günlük süreç tamamlanmış, gidilecek restoran kalmamış demektir.
                 //Eğer bir ya da iki gün eksik olunursa burada kontrol edilebilir.
+                return;
             }
             //1 ile gidilebilecek restoranların toplam oy sayısı arasında bir değer belirlenir.
             int rand = random.Next(1, totalCapacity + 1);
@@ -134,19 +144,19 @@ namespace NeYesekApp
             //Toplam gidileceği gün sayısı bir azaltılır.
             Place chosen = availableRestaurants[counter - 1];
 
-            for (int j = 0; j < allRestaurant.Count; j++)
+            for (int j = 0; j < allRestaurants.Count; j++)
             {
-                if (chosen.name == allRestaurant[j].name)
+                if (chosen.name == allRestaurants[j].name)
                 {
-                    allRestaurant[j].disable(availableRestaurants.Count * 7 / 25);
-                    allRestaurant[j].vote--;
-                    if (!allRestaurant[j].IsValidForWalking)
+                    allRestaurants[j].disable(availableRestaurants.Count * 7 / 25);
+                    allRestaurants[j].vote--;
+                    if (!allRestaurants[j].IsValidForWalking)
                     {
-                        for (int k = 0; k < allRestaurant.Count; k++)
+                        for (int k = 0; k < allRestaurants.Count; k++)
                         {
-                            if (!allRestaurant[k].IsValidForWalking)
+                            if (!allRestaurants[k].IsValidForWalking)
                             {
-                                allRestaurant[k].disable(3);
+                                allRestaurants[k].disable(3);
                             }
                         }
                     }
@@ -155,11 +165,11 @@ namespace NeYesekApp
             using (var ctx = new NeYesekAppContext())
             {
                 var db = ctx.RestaurantScheduleInfos.ToList();
-                for (int k = 0; k < allRestaurant.Count; k++)
+                for (int k = 0; k < allRestaurants.Count; k++)
                 {
-                    db[k].DisableDay = allRestaurant[k].disableDay;
-                    db[k].Enable = allRestaurant[k].enable;
-                    db[k].Possibility = allRestaurant[k].vote;
+                    db[k].DisableDay = allRestaurants[k].disableDay;
+                    db[k].Enable = allRestaurants[k].enable;
+                    db[k].Possibility = allRestaurants[k].vote;
                 }
                 ctx.SaveChanges();
                 //allRestaurant listesi güncel restoran bilgilerine sahip. Bunu database'e yaz.
@@ -170,7 +180,7 @@ namespace NeYesekApp
             restaurant=result;
         }
 
-        public void CacheItemRemoved(string k, object v, CacheItemRemovedReason r)
+        public static void CacheItemRemoved(string k, object v, CacheItemRemovedReason r)
         {
             switch (k)
             {
@@ -179,6 +189,9 @@ namespace NeYesekApp
                     break;
                 case CALCULATE_NEW_RESTAURANTS:
                     DoCalculateNextRestaurantsTask(Convert.ToInt32(v));
+                    break;
+                case VOTING:
+                    DoVotingEndedTask();
                     break;
             }
         }

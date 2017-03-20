@@ -34,13 +34,16 @@
                                         <span class="input-group-btn">
                                             <button type="button" class="btn btn-danger decreaseButton">-</button>
                                         </span>
-                                        <asp:Label ID="RestaurantID" runat="server" Text='<%# Eval("ID")%>' Visible="false" ></asp:Label>
-                                        <asp:TextBox ID="Vote" runat="server" CssClass="form-control vote" style="text-align: center" /> 
+                                        <asp:Label ID="RestaurantID" runat="server" Text='<%# Eval("ID")%>' Visible="false"></asp:Label>
+                                        <asp:TextBox ID="Vote" runat="server" CssClass="form-control vote" Style="text-align: center" />
                                         <span class="input-group-btn">
                                             <button type="button" class="btn btn-success increaseButton">+</button>
                                         </span>
                                     </div>
-                                    <asp:Button ID="SaveVote" class="btn btn-default btn-lg btn-block" CommandName="Save" runat="server" Text="Vote" />
+                                    <%if (global_asax.IsVotingEnabled)
+                                        { %>
+                                        <asp:Button ID="SaveVote" class="btn btn-default btn-lg btn-block" CommandName="Save" runat="server" Text="Vote" />
+                                    <% } %>
                                     <div class="stars">
                                         <span class="glyphicon glyphicon-star"></span>
                                         <span class="glyphicon glyphicon-star"></span>

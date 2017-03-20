@@ -208,6 +208,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Data\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
@@ -226,12 +227,11 @@
     <Content Include="Content\Restaurants.css" />
     <Content Include="Content\Votes.css" />
     <Content Include="Dashboard.aspx" />
-    <Content Include="Data\5.png" />
-    <Content Include="Data\8.jpg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="icon.png" />
     <Content Include="Login.aspx" />
     <Content Include="Members.aspx" />
     <Content Include="NeYesekBootstrap.Master" />
@@ -316,13 +316,6 @@
     </Compile>
     <Compile Include="Restaurants\Details.aspx.designer.cs">
       <DependentUpon>Details.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="StartThePlanning.aspx.cs">
-      <DependentUpon>StartThePlanning.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="StartThePlanning.aspx.designer.cs">
-      <DependentUpon>StartThePlanning.aspx</DependentUpon>
     </Compile>
     <Compile Include="Dashboard.aspx.cs">
       <DependentUpon>Dashboard.aspx</DependentUpon>
@@ -439,6 +432,9 @@
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />

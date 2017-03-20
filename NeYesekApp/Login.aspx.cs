@@ -20,7 +20,7 @@ namespace NeYesekApp
         {
             using (var ctx = new NeYesekAppContext())
             {
-                var user = ctx.Users.Where(x => x.Email == login_email.Text).Single();
+                var user = ctx.Users.Where(x => x.Email == login_email.Text).SingleOrDefault();
                 if(user == null)
                 {
                     var message = string.Format("User with email = {0} not found", login_email.Text);

@@ -69,7 +69,11 @@ namespace NeYesekApp
                     Name = restaurant_name.Text,
                     IsOpen = restaurant_isopen.Checked,
                     IsValidForWalking = restaurant_iswalking.Checked,
-                    Score = 0.0
+                    Score = 0.0,
+                    ScheduleInformation = new RestaurantScheduleInfo()
+                    {
+                        
+                    }
                 });
 
                 ctx.SaveChanges();
@@ -91,6 +95,7 @@ namespace NeYesekApp
                 ctx.SaveChanges();
             }
 
+            Response.Redirect("/Restaurants/Default.aspx");
         }
 
         private Bitmap ResizeBitmap(Bitmap b, int nWidth, int nHeight)

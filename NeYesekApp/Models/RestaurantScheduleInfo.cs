@@ -10,7 +10,6 @@ namespace NeYesekApp.Models
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public int RestaurantId { get; set; }
 
         public double Possibility { get; set; }
 
@@ -18,7 +17,8 @@ namespace NeYesekApp.Models
 
         public int DisableDay { get; set; }
 
-        [ForeignKey("RestaurantId")]
-        public Restaurant Restaurant { get; set; }
+        [ForeignKey("Restaurant")]
+        public int RestaurantId { get; set; }
+        public virtual Restaurant Restaurant { get; set; }
     }
 }

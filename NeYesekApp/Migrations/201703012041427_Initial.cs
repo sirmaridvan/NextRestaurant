@@ -7,6 +7,7 @@ namespace NeYesekApp.Migrations
     {
         public override void Up()
         {
+            this.DropForeignKey("UserVotes", "FK_dbo.UserVotes_dbo.UserVotes_UserId");
         }
         
         public override void Down()

@@ -28,7 +28,10 @@ namespace NeYesekApp.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Restaurant>().HasRequired<RestaurantScheduleInfo>(r => r.ScheduleInformation).WithOptional(s => s.Restaurant).WillCascadeOnDelete(false);
+            modelBuilder.Entity<Restaurant>()
+                .HasOptional<RestaurantScheduleInfo>(r => r.ScheduleInformation)
+                .WithOptionalPrincipal(s => s.Restaurant)
+                .WillCascadeOnDelete(false);
         //    modelBuilder.Entity<User>()
         //        .HasMany<UserVote>(u => u.Votes)
         //        .WithRequired(v => v.User);

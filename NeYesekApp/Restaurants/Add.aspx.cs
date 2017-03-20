@@ -69,11 +69,14 @@ namespace NeYesekApp
                     Name = restaurant_name.Text,
                     IsOpen = restaurant_isopen.Checked,
                     IsValidForWalking = restaurant_iswalking.Checked,
-                    Score = 0.0,
-                    ScheduleInformation = new RestaurantScheduleInfo()
-                    {
-                        
-                    }
+                    Score = 0.0
+                });
+
+                ctx.SaveChanges();
+
+                var schedule = ctx.RestaurantScheduleInfos.Add(new RestaurantScheduleInfo()
+                {
+                    Restaurant = restaurant
                 });
 
                 ctx.SaveChanges();

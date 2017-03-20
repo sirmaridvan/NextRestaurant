@@ -45,6 +45,7 @@ namespace NeYesekApp
             IsVotingEnabled = false;
 
             //Burada restaurant lar eklenecek vs vs
+            Global.DoCalculateNextRestaurantsTask(10);
         }
 
         private static void DoSendMailTask(int hours)

@@ -8,7 +8,7 @@ namespace NeYesekApp.Models
 {
     public class RestaurantScheduleInfo
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key]
         public int Id { get; set; }
 
         public double Possibility { get; set; }
@@ -16,6 +16,7 @@ namespace NeYesekApp.Models
         public bool Enable { get; set; }
 
         public int DisableDay { get; set; } 
+
         public virtual Restaurant Restaurant { get; set; }
     }
 }

@@ -31,13 +31,6 @@ namespace NeYesekApp
             // Code that runs on application startup
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-
-
-            //DoSendMailTask(10);
-            //DoCalculateNextRestaurantsTask(10);
-            //await GetWeatherInformation();
-            //CalculateNextRestaurants();
-            //Dashboard.setDailyRestaurant(restaurant);
         }
 
         private static void DoVotingEndedTask()
@@ -46,17 +39,23 @@ namespace NeYesekApp
 
             //Burada restaurant lar eklenecek vs vs
             SendEmailToAllUsers("Voting has ended!", "Dear users,\nVoting has ended successfully. \nYou will be notified every day about your restaurants!\n\n Have fun!\n\nNeYesek!");
-
+            List<Restaurant> allRestaurant;
             using (var ctx = new NeYesekAppContext())
             {
                 //SU KOD HATALI
                 //BUTUN OBJELERI DOLASMANIN BIR YOLUNU BULMAMIZ LAZIM!!!
-                foreach(var res in ctx.Restaurants)
+                foreach (var res in ctx.Restaurants.Include("ScheduleInformation").ToList())
+
                 {
+
                     res.ScheduleInformation.Possibility = res.Score;
+
                     res.ScheduleInformation.Enable = true;
+
                     res.ScheduleInformation.DisableDay = 0;
+
                 }
+
                 ctx.SaveChanges();
             }
 

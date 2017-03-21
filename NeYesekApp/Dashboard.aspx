@@ -212,7 +212,7 @@
                     <div class="alert-message alert-message-default">
                         <h4>It's time for lunch! :)</h4>
                         <p>
-                            <asp:Label ID="restaurant" runat="server" class="temp"></asp:Label>
+                            <asp:Label ID="restaurant" runat="server" ></asp:Label>
                         </p>
                     </div>
                 </div>

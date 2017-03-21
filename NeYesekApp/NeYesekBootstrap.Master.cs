@@ -26,7 +26,9 @@ namespace NeYesekApp
 
         protected void startVotingButton_Click(object sender, EventArgs e)
         {
-            using(var ctx = new NeYesekAppContext())
+            if (HttpRuntime.Cache.Get(Global.CALCULATE_NEW_RESTAURANTS) != null)
+                HttpRuntime.Cache.Remove(Global.CALCULATE_NEW_RESTAURANTS);
+            using (var ctx = new NeYesekAppContext())
             {
                 ctx.UserVotes.RemoveRange(ctx.UserVotes);
 
@@ -43,8 +45,8 @@ namespace NeYesekApp
         {
 
             var OnCacheRemove = new CacheItemRemovedCallback(Global.CacheItemRemoved);
-            HttpRuntime.Cache.Insert(Global.VOTING, 1, null,
-                    /*DateTime.Today.AddDays(1).AddHours(12)*/DateTime.Now.AddSeconds(30), Cache.NoSlidingExpiration,
+            HttpRuntime.Cache.Insert(Global.VOTING_ENDED, 1, null,
+                    /*DateTime.Today.AddDays(1).AddHours(10)*/DateTime.Now.AddSeconds(70), Cache.NoSlidingExpiration,
                     CacheItemPriority.NotRemovable, OnCacheRemove);
             Global.IsVotingEnabled = true;
             var message = string.Format("Voting is enabled until tomorrow noon!");

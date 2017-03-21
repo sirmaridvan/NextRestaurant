@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 namespace NeYesekApp.Models
 {
+    [Table("RestaurantScheduleInformations")]
     public class RestaurantScheduleInfo
     {
         [Key]

@@ -25,6 +25,7 @@ namespace NeYesekApp.Models
         public System.Data.Entity.DbSet<NeYesekApp.Models.User> Users { get; set; }
         public System.Data.Entity.DbSet<NeYesekApp.Models.UserVote> UserVotes { get; set; }
         public System.Data.Entity.DbSet<NeYesekApp.Models.RestaurantScheduleInfo> RestaurantScheduleInfos { get; set; }
+        public System.Data.Entity.DbSet<NeYesekApp.Models.RestaurantHistory> RestaurantHistories { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

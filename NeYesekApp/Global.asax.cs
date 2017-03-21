@@ -18,19 +18,47 @@ namespace NeYesekApp
         //Cache consts
         public const String SEND_EMAIL = "SendMail";
         public const String CALCULATE_NEW_RESTAURANTS = "CalculateNextRestaurants";
-        public const String VOTING = "Voting";
-
+        public const String VOTING_ENDED = "VotingEnded";
+        public const String VOTING_STARTED = "VotingStarted";
         //for voting page
         public static bool IsVotingEnabled = false;
 
         private static DailyWeatherData todayData = null;
-        private static String restaurant="";
+        private static String restaurant = "";
 
         void Application_Start(object sender, EventArgs e)
         {
             // Code that runs on application startup
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            DoVotingStartedTask();
+        }
+
+        private static void DoVotingStartedTask()
+        {
+            if(HttpRuntime.Cache.Get(CALCULATE_NEW_RESTAURANTS) != null)
+                HttpRuntime.Cache.Remove(CALCULATE_NEW_RESTAURANTS);
+
+
+            SendEmailToAllUsers("Voting has started!", "Dear users,\nVoting has now started.\n\n\n Have fun!\n\nNeYesek!");
+
+            Global.IsVotingEnabled = true;
+
+            using (var ctx = new NeYesekAppContext())
+            {
+                ctx.UserVotes.RemoveRange(ctx.UserVotes);
+
+                foreach (var res in ctx.Restaurants.ToList())
+                {
+                    res.Score = 0;
+                }
+                ctx.SaveChanges();
+            }
+
+            var OnCacheRemove = new CacheItemRemovedCallback(Global.CacheItemRemoved);
+            HttpRuntime.Cache.Insert(Global.VOTING_ENDED, 1, null,
+                    DateTime.Today.AddDays(1).AddHours(10), Cache.NoSlidingExpiration,
+                    CacheItemPriority.NotRemovable, OnCacheRemove);
         }
 
         private static void DoVotingEndedTask()
@@ -39,11 +67,10 @@ namespace NeYesekApp
 
             //Burada restaurant lar eklenecek vs vs
             SendEmailToAllUsers("Voting has ended!", "Dear users,\nVoting has ended successfully. \nYou will be notified every day about your restaurants!\n\n Have fun!\n\nNeYesek!");
-            List<Restaurant> allRestaurant;
+
             using (var ctx = new NeYesekAppContext())
             {
-                //SU KOD HATALI
-                //BUTUN OBJELERI DOLASMANIN BIR YOLUNU BULMAMIZ LAZIM!!!
+
                 foreach (var res in ctx.Restaurants.Include("ScheduleInformation").ToList())
 
                 {
@@ -59,28 +86,37 @@ namespace NeYesekApp
                 ctx.SaveChanges();
             }
 
-            GetWeatherInformation().Wait();
-            CalculateNextRestaurants();
-            Dashboard.setDailyRestaurant(restaurant);
-            SendEmailToAllUsers("Today's Restaurant!", "Dear users,Today's restaurant is " + restaurant + "\n\n Have fun!\n\nNeYesek!");
+            DoCalculateNextRestaurantsTask(10);
+
+            var OnCacheRemove = new CacheItemRemovedCallback(CacheItemRemoved);
+
+            HttpRuntime.Cache.Insert(VOTING_STARTED, 1, null,
+                DateTime.Today.AddDays(99).AddHours(13), Cache.NoSlidingExpiration,
+                CacheItemPriority.NotRemovable, OnCacheRemove);
         }
 
         private static void DoCalculateNextRestaurantsTask(int hours)
         {
+
+            GetWeatherInformation().Wait();
+            CalculateNextRestaurants();
+            Dashboard.setDailyRestaurant(restaurant);
+            using(var ctx = new NeYesekAppContext())
+            {
+                ctx.RestaurantHistories.Add(new RestaurantHistory()
+                {
+                    DateAdded = DateTime.Today,
+                    RestaurantName = restaurant
+                });
+                ctx.SaveChanges();
+            }
+            SendEmailToAllUsers("Today's Restaurant!", "Dear users,Today's restaurant is " + restaurant + "\n\n Have fun!\n\nNeYesek!");
+
             var OnCacheRemove = new CacheItemRemovedCallback(CacheItemRemoved);
 
-            if (DateTime.Now.Hour < hours)
-            {
-                HttpRuntime.Cache.Insert(CALCULATE_NEW_RESTAURANTS, hours, null,
-                    DateTime.Today.AddHours(hours), Cache.NoSlidingExpiration,
-                    CacheItemPriority.NotRemovable, OnCacheRemove);
-            }
-            else
-            {
-                HttpRuntime.Cache.Insert(CALCULATE_NEW_RESTAURANTS, hours, null,
-                    DateTime.Today.AddDays(1).AddHours(hours), Cache.NoSlidingExpiration,
-                    CacheItemPriority.NotRemovable, OnCacheRemove);
-            }
+            HttpRuntime.Cache.Insert(CALCULATE_NEW_RESTAURANTS, hours, null,
+                DateTime.Today.AddDays(1).AddHours(hours), Cache.NoSlidingExpiration,
+                CacheItemPriority.NotRemovable, OnCacheRemove);
         }
 
         private static void CalculateNextRestaurants()
@@ -96,7 +132,7 @@ namespace NeYesekApp
             //Bu yorum bloğu içerisindeki döngü veritabanındaki restoranlara oylama eklendiğinde aktif edilecek. Bunun yerine şimdilik el ile doldurulmuş bir liste kullanılacak.
             for (int i = 0; i < listRestaurantDB.Count; i++)
             {
-                allRestaurants.Add(new Place(listRestaurantDB[i].Id,listRestaurantDB[i].Name, Convert.ToInt32(listRestaurantDB[i].ScheduleInformation.Possibility), listRestaurantDB[i].ScheduleInformation.Enable, listRestaurantDB[i].IsValidForWalking, listRestaurantDB[i].ScheduleInformation.DisableDay));
+                allRestaurants.Add(new Place(listRestaurantDB[i].Id, listRestaurantDB[i].Name, Convert.ToInt32(listRestaurantDB[i].ScheduleInformation.Possibility), listRestaurantDB[i].ScheduleInformation.Enable, listRestaurantDB[i].IsValidForWalking, listRestaurantDB[i].ScheduleInformation.DisableDay));
             }
 
             string result = "";
@@ -178,7 +214,7 @@ namespace NeYesekApp
             //Ertesi gün gidilebilecek restoran değişeceği için, "availableRestaurants" listesi sıfırlanır.
             availableRestaurants.Clear();
             result = chosen.name;
-            restaurant=result;
+            restaurant = result;
         }
 
         public static void CacheItemRemoved(string k, object v, CacheItemRemovedReason r)
@@ -191,8 +227,11 @@ namespace NeYesekApp
                 case CALCULATE_NEW_RESTAURANTS:
                     DoCalculateNextRestaurantsTask(Convert.ToInt32(v));
                     break;
-                case VOTING:
+                case VOTING_ENDED:
                     DoVotingEndedTask();
+                    break;
+                case VOTING_STARTED:
+                    DoVotingStartedTask();
                     break;
             }
         }
@@ -204,7 +243,7 @@ namespace NeYesekApp
             {
                 foreach (var mail in ctx.Users.Select(x => x.Email))
                 {
-                    if(General.IsValidEmail(mail))
+                    if (General.IsValidEmail(mail))
                         message.To.Add(new MailAddress(mail));
                 }
             }

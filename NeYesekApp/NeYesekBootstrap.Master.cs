@@ -44,7 +44,7 @@ namespace NeYesekApp
 
             var OnCacheRemove = new CacheItemRemovedCallback(Global.CacheItemRemoved);
             HttpRuntime.Cache.Insert(Global.VOTING, 1, null,
-                    /*DateTime.Today.AddDays(1).AddHours(12)*/DateTime.Now.AddMinutes(1), Cache.NoSlidingExpiration,
+                    /*DateTime.Today.AddDays(1).AddHours(12)*/DateTime.Now.AddSeconds(30), Cache.NoSlidingExpiration,
                     CacheItemPriority.NotRemovable, OnCacheRemove);
             Global.IsVotingEnabled = true;
             var message = string.Format("Voting is enabled until tomorrow noon!");

@@ -74,7 +74,7 @@ namespace NeYesekApp
 
                             if(isUpdate)
                             {
-                                if (voteSum - userVote.Vote + vote >= 100)
+                                if (voteSum - userVote.Vote + vote > 100)
                                 {
                                     var message = string.Format("You voted too much! Vote total should be at most 100! Yours is {0}", (voteSum - userVote.Vote + vote));
                                     Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "Error!", "<script>alert('" + message + "');</script>");
@@ -95,7 +95,7 @@ namespace NeYesekApp
 
                             } else
                             {
-                                if (voteSum + vote >= 100)
+                                if (voteSum + vote > 100)
                                 {
                                     var message = string.Format("You voted too much! Vote total should be at most 100! Yours is {0}", (voteSum + vote));
                                     Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "Error!", "<script>alert('" + message + "');</script>");

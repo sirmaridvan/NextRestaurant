@@ -24,9 +24,9 @@ namespace NeYesekApp
         public static bool IsVotingEnabled = false;
 
         private static DailyWeatherData todayData = null;
-        private String restaurant="";
+        private static String restaurant="";
 
-        async void Application_Start(object sender, EventArgs e)
+        void Application_Start(object sender, EventArgs e)
         {
             // Code that runs on application startup
             RouteConfig.RegisterRoutes(RouteTable.Routes);
@@ -35,9 +35,9 @@ namespace NeYesekApp
 
             //DoSendMailTask(10);
             //DoCalculateNextRestaurantsTask(10);
-            await GetWeatherInformation();
-            CalculateNextRestaurants();
-            Dashboard.setDailyRestaurant(restaurant);
+            //await GetWeatherInformation();
+            //CalculateNextRestaurants();
+            //Dashboard.setDailyRestaurant(restaurant);
         }
 
         private static void DoVotingEndedTask()
@@ -45,26 +45,27 @@ namespace NeYesekApp
             IsVotingEnabled = false;
 
             //Burada restaurant lar eklenecek vs vs
-            Global.DoCalculateNextRestaurantsTask(10);
+            SendEmailToAllUsers("Voting has ended!", "Dear users,\nVoting has ended successfully. \nYou will be notified every day about your restaurants!\n\n Have fun!\n\nNeYesek!");
+
+            using (var ctx = new NeYesekAppContext())
+            {
+                //SU KOD HATALI
+                //BUTUN OBJELERI DOLASMANIN BIR YOLUNU BULMAMIZ LAZIM!!!
+                foreach(var res in ctx.Restaurants)
+                {
+                    res.ScheduleInformation.Possibility = res.Score;
+                    res.ScheduleInformation.Enable = true;
+                    res.ScheduleInformation.DisableDay = 0;
+                }
+                ctx.SaveChanges();
+            }
+
+            GetWeatherInformation().Wait();
+            CalculateNextRestaurants();
+            Dashboard.setDailyRestaurant(restaurant);
+            SendEmailToAllUsers("Today's Restaurant!", "Dear users,Today's restaurant is " + restaurant + "\n\n Have fun!\n\nNeYesek!");
         }
 
-        private static void DoSendMailTask(int hours)
-        {
-            var OnCacheRemove = new CacheItemRemovedCallback(CacheItemRemoved);
-
-            if (DateTime.Now.Hour < hours)
-            {
-                HttpRuntime.Cache.Insert(SEND_EMAIL, hours, null,
-                    DateTime.Today.AddHours(hours), Cache.NoSlidingExpiration,
-                    CacheItemPriority.NotRemovable, OnCacheRemove);
-            }
-            else
-            {
-                HttpRuntime.Cache.Insert(SEND_EMAIL, hours, null,
-                    DateTime.Today.AddDays(1).AddHours(hours), Cache.NoSlidingExpiration,
-                    CacheItemPriority.NotRemovable, OnCacheRemove);
-            }
-        }
         private static void DoCalculateNextRestaurantsTask(int hours)
         {
             var OnCacheRemove = new CacheItemRemovedCallback(CacheItemRemoved);
@@ -83,7 +84,7 @@ namespace NeYesekApp
             }
         }
 
-        private void CalculateNextRestaurants()
+        private static void CalculateNextRestaurants()
         {
             List<Restaurant> listRestaurantDB;
             using (var ctx = new NeYesekAppContext())
@@ -185,9 +186,9 @@ namespace NeYesekApp
         {
             switch (k)
             {
-                case SEND_EMAIL:
+                /*case SEND_EMAIL:
                     DoSendMailTask(Convert.ToInt32(v));
-                    break;
+                    break;*/
                 case CALCULATE_NEW_RESTAURANTS:
                     DoCalculateNextRestaurantsTask(Convert.ToInt32(v));
                     break;
@@ -197,14 +198,15 @@ namespace NeYesekApp
             }
         }
 
-        public void SendEmail(string subject, string body)
+        public static void SendEmailToAllUsers(string subject, string body)
         {
             MailMessage message = new MailMessage();
             using (var ctx = new NeYesekAppContext())
             {
                 foreach (var mail in ctx.Users.Select(x => x.Email))
                 {
-                    message.To.Add(new MailAddress(mail));
+                    if(General.IsValidEmail(mail))
+                        message.To.Add(new MailAddress(mail));
                 }
             }
             message.Subject = subject;
@@ -225,7 +227,7 @@ namespace NeYesekApp
 
             }
         }
-        async Task GetWeatherInformation()
+        async static Task GetWeatherInformation()
         {
             var weatherService = RestService.For<IWeatherService>(DarkSky.BaseUrl);
             var forecastResult = await weatherService.GetForecast(DarkSky.ApiKey, DarkSky.IstanbulLatitude, DarkSky.IstanbulLongtitude, DarkSky.SI_UNIT);

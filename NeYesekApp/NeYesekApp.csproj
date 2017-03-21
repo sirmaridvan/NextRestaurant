@@ -208,7 +208,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Data\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
@@ -227,6 +226,9 @@
     <Content Include="Content\Restaurants.css" />
     <Content Include="Content\Votes.css" />
     <Content Include="Dashboard.aspx" />
+    <Content Include="Data\1.png" />
+    <Content Include="Data\2.jpg" />
+    <Content Include="Data\5.png" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />

@@ -57,7 +57,7 @@ namespace NeYesekApp
 
             var OnCacheRemove = new CacheItemRemovedCallback(Global.CacheItemRemoved);
             HttpRuntime.Cache.Insert(Global.VOTING_ENDED, 1, null,
-                    DateTime.Today.AddDays(1).AddHours(10), Cache.NoSlidingExpiration,
+                    DateTime.Today.AddDays(1).AddHours(10) , Cache.NoSlidingExpiration,
                     CacheItemPriority.NotRemovable, OnCacheRemove);
         }
 

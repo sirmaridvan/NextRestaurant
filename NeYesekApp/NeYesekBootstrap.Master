@@ -65,6 +65,7 @@
                         <li><a href="/Restaurants/">Restaurants</a></li>
                         <li><a href="/Members.aspx">Members</a></li>
                         <li><a href="/Votes.aspx">Votes</a></li>
+                        <li><a href="/History.aspx">History</a></li>
                         <li><a href="#" id="startVoting">Start Voting</a></li>
                         <% } %>
                         <li><a href="/About.aspx">About Us</a></li>

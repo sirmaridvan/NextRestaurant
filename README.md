@@ -1,4 +1,7 @@
-# neyesek
+# Social Reades
+
+#This app is the term project of BLG440E 2016 Spring Term Course.
+
 
 Project Description: 
 
